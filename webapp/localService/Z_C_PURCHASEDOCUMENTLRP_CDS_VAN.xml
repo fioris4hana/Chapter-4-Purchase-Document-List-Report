@@ -1,0 +1,174 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference
+		Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='ER9CLNT001')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:Reference
+		Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='ER9CLNT001')/$value"><edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/></edmx:Reference>
+	<edmx:Reference
+		Uri="../../catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='ER9CLNT001')/$value"><edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/></edmx:Reference>
+	<edmx:Reference Uri="../../../sap/z_c_purchasedocumentlrp_cds/$metadata"><edmx:Include Namespace="Z_C_PURCHASEDOCUMENTLRP_CDS" Alias="SAP"/></edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="z_c_purchasedocumentlrp_cds_van.v1">
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType/PurchaseDocumentItemImageURL"><Annotation Term="UI.HiddenFilter"/><Annotation Term="UI.IsImageURL"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType/Currency"><Annotation Term="UI.Hidden"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType/QuantityUnit"><Annotation Term="UI.Hidden"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType">
+				<Annotation Term="UI.HeaderInfo">
+					<Record><PropertyValue Property="TypeName" String=""/><PropertyValue Property="TypeNamePlural" String=""/><PropertyValue Property="ImageUrl" Path="PurchaseDocumentItemImageURL"/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocumentItem"/></Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocumentItem"/></Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocumentItemImageURL"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocument"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocumentItem"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Price"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Quantity"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="OverallItemPrice"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Vendor"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="VendorType"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/PurchaseDocumentImageURL"><Annotation Term="UI.HiddenFilter"/><Annotation Term="UI.IsImageURL"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/OverallPriceCriticality"><Annotation Term="UI.Hidden"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/Approve_ac"><Annotation Term="UI.Hidden"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/Close_ac"><Annotation Term="UI.Hidden"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/IsApprovalRequired">
+				<Annotation Term="Common.Text" Path="to_IsApprovalRequired/IndicatorValue_Text"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/></Annotation>
+			</Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/Status">
+				<Annotation Term="Common.Text" Path="to_Status/StatusText"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/></Annotation>
+			</Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/Priority">
+				<Annotation Term="Common.Text" Path="to_Priority/PriorityText"><Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextOnly"/></Annotation>
+			</Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType">
+				<Annotation Term="UI.DataPoint" Qualifier="IsApprovalRequired">
+					<Record><PropertyValue Property="Value" Path="IsApprovalRequired"/><PropertyValue Property="Title" String=""/><PropertyValue Property="Criticality" Path="OverallPriceCriticality"/></Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="OverallPrice">
+					<Record><PropertyValue Property="Value" Path="OverallPrice"/><PropertyValue Property="Title" String=""/><PropertyValue Property="Criticality" Path="OverallPriceCriticality"/></Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="Priority">
+					<Record><PropertyValue Property="Value" Path="Priority"/><PropertyValue Property="Title" String=""/></Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="Status">
+					<Record><PropertyValue Property="Value" Path="Status"/><PropertyValue Property="Title" String=""/></Record>
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="PurchaseDocumentCollectionFacet"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="BasicDataFieldGroupReferenceFacet"/><PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#BasicDataFieldGroup"/></Record>
+									<Record Type="UI.ReferenceFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="PurchasingDocumentFieldGroupReferenceFacet"/><PropertyValue Property="Target" AnnotationPath="@UI.FieldGroup#PurchasingDocumentFieldGroup"/></Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.ReferenceFacet"><PropertyValue Property="Label" String=""/><PropertyValue Property="ID" String="PurchaseDocumentItemsLineItemReferenceFacet"/><PropertyValue Property="Target" AnnotationPath="to_PurchaseDocumentItem/@UI.LineItem"/></Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.HeaderFacets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet"><PropertyValue Property="ID" String="StatusDataPointFacet"/><PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Status"/></Record>
+						<Record Type="UI.ReferenceFacet"><PropertyValue Property="ID" String="OverallPriceDataPointFacet"/><PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#OverallPrice"/></Record>
+						<Record Type="UI.ReferenceFacet"><PropertyValue Property="ID" String="ApprovalRequiredDataPointFacet"/><PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#IsApprovalRequired"/></Record>
+						<Record Type="UI.ReferenceFacet"><PropertyValue Property="ID" String="PriorityDataPointFacet"/><PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#Priority"/></Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="BasicDataFieldGroup">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="crea_date_time"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="crea_uname"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="lchg_date_time"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="lchg_uname"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.FieldGroup" Qualifier="PurchasingDocumentFieldGroup">
+					<Record>
+						<PropertyValue Property="Data">
+							<Collection>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocument"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Description"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Priority"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchasingOrganization"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+								<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Status"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.HeaderInfo">
+					<Record><PropertyValue Property="TypeName" String=""/><PropertyValue Property="TypeNamePlural" String=""/><PropertyValue Property="ImageUrl" Path="PurchaseDocumentImageURL"/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocument"/></Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Description"/></Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataFieldForAction"><PropertyValue Property="Label" String=""/><PropertyValue Property="Action" String="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PURCHASEDOCUMENTLRP_CDS_Entities/Z_C_PurchaseDocumentLrpApprove"/><PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataFieldForAction"><PropertyValue Property="Label" String=""/><PropertyValue Property="Action" String="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PURCHASEDOCUMENTLRP_CDS_Entities/Z_C_PurchaseDocumentLrpClose"/><PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataFieldForAction"><PropertyValue Property="Label" String=""/><PropertyValue Property="Action" String="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PURCHASEDOCUMENTLRP_CDS_Entities/Z_C_PurchaseDocumentLrpApprove"/><PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/></Record>
+						<Record Type="UI.DataFieldForAction"><PropertyValue Property="Label" String=""/><PropertyValue Property="Action" String="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PURCHASEDOCUMENTLRP_CDS_Entities/Z_C_PurchaseDocumentLrpClose"/><PropertyValue Property="InvocationGrouping" EnumMember="UI.OperationGroupingType/Isolated"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocumentImageURL"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="PurchaseDocument"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Priority"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Criticality" Path="OverallPriceCriticality"/><PropertyValue Property="Value" Path="OverallPrice"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="Status"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+						<Record Type="UI.DataFieldForAnnotation"><PropertyValue Property="Label" String=""/><PropertyValue Property="Target" AnnotationPath="to_PurchasingOrganization/@Communication.Contact"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Criticality" Path="OverallPriceCriticality"/><PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithIcon"/><PropertyValue Property="Value" Path="IsApprovalRequired"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="crea_date_time"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="crea_uname"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="lchg_date_time"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+						<Record Type="UI.DataField"><PropertyValue Property="Value" Path="lchg_uname"/><Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/Medium"/></Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>PurchaseDocument</PropertyPath>
+						<PropertyPath>Priority</PropertyPath>
+						<PropertyPath>Status</PropertyPath>
+						<PropertyPath>PurchasingOrganization</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchasingOrganizationType/Email"><Annotation Term="Communication.IsEmailAddress"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchasingOrganizationType/Phone"><Annotation Term="Communication.IsPhoneNumber"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchasingOrganizationType/Fax"><Annotation Term="Communication.IsPhoneNumber"/></Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchasingOrganizationType">
+				<Annotation Term="Communication.Contact">
+					<Record><PropertyValue Property="fn" Path="Description"/>
+						<PropertyValue Property="tel">
+							<Collection>
+								<Record><PropertyValue Property="type" EnumMember="Communication.PhoneType/fax"/><PropertyValue Property="uri" Path="Fax"/></Record>
+								<Record><PropertyValue Property="type" EnumMember="Communication.PhoneType/work"/><PropertyValue Property="uri" Path="Phone"/></Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="email">
+							<Collection>
+								<Record><PropertyValue Property="type" EnumMember="Communication.ContactInformationType/work"/><PropertyValue Property="address" Path="Email"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

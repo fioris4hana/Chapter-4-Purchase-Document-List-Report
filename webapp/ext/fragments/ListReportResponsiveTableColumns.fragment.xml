@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<Column>
+		<Text text="Budget Share"/>
+		<customData>
+			<core:CustomData key="p13nData" value='\{"columnKey": "BudgetShare", "columnIndex" : "200"}'/>
+		</customData>
+	</Column>
+	<Column>
+		<Text text="Delivery Time"/>
+		<customData>
+			<core:CustomData key="p13nData" value='\{"columnKey": "DeliveryTime", "columnIndex" : "201"}'/>
+		</customData>
+	</Column>
+</core:FragmentDefinition>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/Z_C_PURCHASEDOCUMENTLRP_CDS/$metadata">
+		<edmx:Include Alias="Z_C_PURCHASEDOCUMENTLRP_CDS" Namespace="Z_C_PURCHASEDOCUMENTLRP_CDS"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm"
+			Namespace="fiori.manage.purchase.documents.purchasedocumentslrp.Z_C_PURCHASEDOCUMENTLRP_CDS">
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType">
+				<!-- Refresh Last Changed Date and User after field changed using Side Effect annotation -->
+				<Annotation Term="com.sap.vocabularies.Common.v1.SideEffects" Qualifier="PurchaseDocumentChanged">
+					<Record>
+						<PropertyValue Property="EffectTypes" EnumMember="ValueChange"/>
+						<PropertyValue Property="SourceProperties">
+							<Collection>
+								<PropertyPath>PurchaseDocument</PropertyPath>
+								<PropertyPath>Description</PropertyPath>
+								<PropertyPath>Priority</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="TargetProperties">
+							<Collection>
+								<PropertyPath>lchg_date_time</PropertyPath>
+								<PropertyPath>lchg_uname</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!-- Refresh Status Text after Status change using Side Effect annotation -->
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PURCHASEDOCUMENTLRP_CDS_Entities/Z_C_PurchaseDocumentLrpApprove">
+				<Annotation Term="com.sap.vocabularies.Common.v1.IsActionCritical" Bool="true"/>
+				<Annotation Term="com.sap.vocabularies.Common.v1.SideEffects" Qualifier="UpdateStatusText">
+					<Record>
+						<PropertyValue Property="EffectTypes" EnumMember="ValueChange"/>
+						<PropertyValue Property="SourceProperties">
+							<Collection>
+								<PropertyPath>Status</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="TargetProperties">
+							<Collection>
+								<PropertyPath>_it/to_Status/StatusText</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PURCHASEDOCUMENTLRP_CDS_Entities/Z_C_PurchaseDocumentLrpClose">
+				<Annotation Term="com.sap.vocabularies.Common.v1.IsActionCritical" Bool="true"/>
+				<Annotation Term="com.sap.vocabularies.Common.v1.SideEffects" Qualifier="UpdateStatusText">
+					<Record>
+						<PropertyValue Property="EffectTypes" EnumMember="ValueChange"/>
+						<PropertyValue Property="SourceProperties">
+							<Collection>
+								<PropertyPath>Status</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="TargetProperties">
+							<Collection>
+								<PropertyPath>_it/to_Status/StatusText</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!--===============================================================================
+                Entity Type from chosen collection 
+                ================================================================================-->
+			<!--
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="ID" String="GeneralInformation"/>
+							<PropertyValue Property="Label" String="{@i18n>@GeneralInfoFacetLabel}"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="Label" String="{@i18n>@GeneralInfoFacetLabel}"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Label" String="{@i18n>@SecondFacetLabel}"/>
+							<PropertyValue Property="Target" AnnotationPath="to_PurchaseDocumentItem/@UI.LineItem"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			-->
+			<!--===============================================================================
+                Entity Type from chosen navigation property
+                ================================================================================-->
+			<!--
+			<Annotations Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue Property="ID" String="GeneralInformation"/>
+							<PropertyValue Property="Label" String="{@i18n>@GeneralInfoFacetLabel}"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue Property="Label" String="{@i18n>@GeneralInfoFacetLabel}"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			-->
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

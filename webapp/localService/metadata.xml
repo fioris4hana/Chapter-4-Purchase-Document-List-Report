@@ -1,0 +1,350 @@
+<edmx:Edmx xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='ER9CLNT001')/$value"><edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='ER9CLNT001')/$value"><edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/></edmx:Reference>
+	<edmx:Reference xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+		Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='ER9CLNT001')/$value"><edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/></edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="Z_C_PURCHASEDOCUMENTLRP_CDS" xml:lang="de" sap:schema-version="1">
+			<EntityType Name="I_CurrencyType" sap:label="Währung" sap:content-version="1">
+				<Key><PropertyRef Name="Currency"/></Key><Property Name="Currency" Type="Edm.String" Nullable="false" MaxLength="5" sap:text="Currency_Text" sap:label="Währung"
+					sap:quickinfo="Währungsschlüssel" sap:semantics="currency-code"/><Property Name="Currency_Text" Type="Edm.String" MaxLength="40" sap:label="" sap:creatable="false" sap:updatable="false"/><Property Name="Decimals" Type="Edm.Byte" sap:label=""/><Property Name="CurrencyISOCode" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label=""/><Property Name="AlternativeCurrencyKey" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label=""/><Property Name="IsPrimaryCurrencyForISOCrcy" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="primär"
+					sap:quickinfo="primärer SAP-Währungscode zum ISO-Code"/></EntityType>
+			<EntityType Name="I_IndicatorType" sap:label="Kennzeichen" sap:content-version="1">
+				<Key><PropertyRef Name="IndicatorValue"/></Key><Property Name="IndicatorValue" Type="Edm.Boolean" Nullable="false" sap:display-format="UpperCase" sap:text="IndicatorValue_Text"
+					sap:label="Feld zum Ankreuzen" sap:heading=""/><Property Name="IndicatorValue_Text" Type="Edm.String" MaxLength="60" sap:label="Kurzbeschreibung" sap:quickinfo="Kurztext zu Festwerten"
+					sap:creatable="false" sap:updatable="false"/></EntityType>
+			<EntityType Name="I_UnitOfMeasureType" sap:label="Maßeinheit" sap:content-version="1">
+				<Key><PropertyRef Name="UnitOfMeasure"/></Key><Property Name="UnitOfMeasure" Type="Edm.String" Nullable="false" MaxLength="3" sap:text="UnitOfMeasure_Text" sap:label="Interne Maßeinheit"
+					sap:quickinfo="Maßeinheit" sap:semantics="unit-of-measure"/><Property Name="UnitOfMeasure_Text" Type="Edm.String" MaxLength="30" sap:label="Maßeinheitentext"
+					sap:quickinfo="Text zur Maßeinheit (max. 30-stellig)" sap:creatable="false" sap:updatable="false"/><Property Name="UnitOfMeasureDimension" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase"
+					sap:text="to_Dimension/UnitOfMeasureDimension_Text" sap:label="Dimension" sap:quickinfo="Dimensionsschlüssel" sap:value-list="standard"/><Property Name="UnitOfMeasureISOCode" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="ISO-Code"
+					sap:quickinfo="ISO-Code Maßeinheit"/><Property Name="UnitOfMeasureNumberOfDecimals" Type="Edm.Int16" sap:label="Dezimalst.Rundung"
+					sap:quickinfo="Anzahl Dezimalstellen, auf die gerundet werden soll"/><Property Name="UnitOfMeasureDspNmbrOfDcmls" Type="Edm.Int16" sap:label="Dezimalstellen"
+					sap:quickinfo="Anzahl Dezimalstellen bei Zahlendarstellung"/><NavigationProperty Name="to_Dimension" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_744267C89213C6F0BEAA53E2EB9C8F4F"
+					FromRole="FromRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F" ToRole="ToRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F"/></EntityType>
+			<EntityType Name="I_UnitOfMeasureDimensionType" sap:label="Dimension der Mengeneinheit" sap:content-version="1">
+				<Key><PropertyRef Name="UnitOfMeasureDimension"/></Key><Property Name="UnitOfMeasureDimension" Type="Edm.String" Nullable="false" MaxLength="6" sap:display-format="UpperCase"
+					sap:text="UnitOfMeasureDimension_Text" sap:label="Dimension" sap:quickinfo="Dimensionsschlüssel"/><Property Name="UnitOfMeasureDimension_Text" Type="Edm.String" MaxLength="20" sap:label="Dimensionstext" sap:quickinfo="Text zur Dimension"
+					sap:creatable="false" sap:updatable="false"/></EntityType>
+			<EntityType Name="Z_C_PurchaseDocumentItemLrpType" sap:content-version="1">
+				<Key><PropertyRef Name="PurchaseDocument"/><PropertyRef Name="PurchaseDocumentItem"/></Key><Property Name="PurchaseDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase"
+					sap:text="to_PurchaseDocument/Description" sap:label="" sap:value-list="standard"/><Property Name="PurchaseDocumentItem" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase"
+					sap:text="Description" sap:label=""/><Property Name="Price" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Currency"/><Property Name="Quantity" Type="Edm.Decimal" Precision="13" Scale="2" sap:unit="QuantityUnit"/><Property Name="OverallItemPrice" Type="Edm.Decimal" Precision="26" Scale="4" sap:unit="Currency" sap:label="" sap:creatable="false"
+					sap:updatable="false"/><Property Name="Vendor" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase"/><Property Name="VendorType" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase" sap:label=""/><Property Name="Description" Type="Edm.String" MaxLength="128" sap:display-format="UpperCase"/><Property Name="Currency" Type="Edm.String" MaxLength="5" sap:text="to_Currency/Currency_Text" sap:value-list="standard"
+					sap:semantics="currency-code"/><Property Name="QuantityUnit" Type="Edm.String" MaxLength="3" sap:text="to_QuantityUnitOfMeasure/UnitOfMeasure_Text"
+					sap:value-list="standard" sap:semantics="unit-of-measure"/><Property Name="PurchaseDocumentItemImageURL" Type="Edm.String" MaxLength="255" sap:display-format="UpperCase" sap:label=""/><Property Name="crea_date_time" Type="Edm.DateTimeOffset" Precision="7" sap:label=""
+					sap:quickinfo="UTC-Zeitstempel in Langform (JJJJMMTThhmmssmmmuuun)"/><Property Name="crea_uname" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="" sap:quickinfo="Benutzername"/><Property Name="lchg_date_time" Type="Edm.DateTimeOffset" Precision="7" sap:label=""
+					sap:quickinfo="UTC-Zeitstempel in Langform (JJJJMMTThhmmssmmmuuun)"/><Property Name="lchg_uname" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="" sap:quickinfo="Benutzername"/><NavigationProperty Name="to_Currency" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_A8CB5CBF503391C36C49FA4624119D97"
+					FromRole="FromRole_assoc_A8CB5CBF503391C36C49FA4624119D97" ToRole="ToRole_assoc_A8CB5CBF503391C36C49FA4624119D97"/><NavigationProperty Name="to_QuantityUnitOfMeasure" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_7226F57B24562C1E2865A8EE4D2F5151"
+					FromRole="FromRole_assoc_7226F57B24562C1E2865A8EE4D2F5151" ToRole="ToRole_assoc_7226F57B24562C1E2865A8EE4D2F5151"/><NavigationProperty Name="to_PurchaseDocument" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_97016371F38D58C92824CBB9A7051227"
+					FromRole="ToRole_assoc_97016371F38D58C92824CBB9A7051227" ToRole="FromRole_assoc_97016371F38D58C92824CBB9A7051227"/></EntityType>
+			<EntityType Name="Z_C_PurchaseDocumentLrpType" sap:content-version="1">
+				<Key><PropertyRef Name="PurchaseDocument"/></Key><Property Name="Approve_ac" Type="Edm.Boolean" sap:label="Dyn. Aktions-Control" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="Close_ac" Type="Edm.Boolean" sap:label="Dyn. Aktions-Control" sap:creatable="false" sap:updatable="false"
+					sap:sortable="false" sap:filterable="false"/><Property Name="PurchaseDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:text="Description"
+					sap:label=""/><Property Name="OverallPrice" Type="Edm.Decimal" Precision="26" Scale="4" sap:unit="Currency" sap:label="" sap:creatable="false"
+					sap:updatable="false"/><Property Name="IsApprovalRequired" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase"
+					sap:text="to_IsApprovalRequired/IndicatorValue_Text" sap:label="" sap:creatable="false" sap:updatable="false" sap:value-list="fixed-values"/><Property Name="OverallPriceCriticality" Type="Edm.Byte" sap:creatable="false" sap:updatable="false"/><Property Name="Status" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase" sap:text="to_Status/StatusText" sap:label=""
+					sap:creatable="false" sap:updatable="false" sap:value-list="fixed-values"/><Property Name="Priority" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:text="to_Priority/PriorityText" sap:label=""
+					sap:value-list="fixed-values"/><Property Name="Description" Type="Edm.String" MaxLength="128" sap:display-format="UpperCase" sap:label=""/><Property Name="PurchasingOrganization" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase"
+					sap:text="to_PurchasingOrganization/Description" sap:label="" sap:value-list="standard"/><Property Name="Currency" Type="Edm.String" MaxLength="5" sap:text="to_Currency/Currency_Text" sap:label="" sap:creatable="false"
+					sap:updatable="false" sap:value-list="standard" sap:semantics="currency-code"/><Property Name="crea_date_time" Type="Edm.DateTimeOffset" Precision="7" sap:label="Zeitstempel" sap:heading=""
+					sap:quickinfo="UTC-Zeitstempel in Langform (JJJJMMTThhmmssmmmuuun)" sap:creatable="false" sap:updatable="false"/><Property Name="crea_uname" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Benutzername" sap:heading=""
+					sap:creatable="false" sap:updatable="false"/><Property Name="lchg_date_time" Type="Edm.DateTimeOffset" Precision="7" sap:label="Zeitstempel" sap:heading=""
+					sap:quickinfo="UTC-Zeitstempel in Langform (JJJJMMTThhmmssmmmuuun)" sap:creatable="false" sap:updatable="false"/><Property Name="lchg_uname" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Benutzername" sap:heading=""
+					sap:creatable="false" sap:updatable="false"/><Property Name="PurchaseDocumentImageURL" Type="Edm.String" MaxLength="255" sap:display-format="UpperCase" sap:label=""/><NavigationProperty Name="to_Currency" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_2DDFCD59E5A5AE54E8630BC945E67847"
+					FromRole="FromRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847" ToRole="ToRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847"/><NavigationProperty Name="to_IsApprovalRequired" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_7B333AA07561F51701758495ACF99669"
+					FromRole="FromRole_assoc_7B333AA07561F51701758495ACF99669" ToRole="ToRole_assoc_7B333AA07561F51701758495ACF99669"/><NavigationProperty Name="to_Priority" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_59F826874C7AC0BDF70077AFD365192D"
+					FromRole="FromRole_assoc_59F826874C7AC0BDF70077AFD365192D" ToRole="ToRole_assoc_59F826874C7AC0BDF70077AFD365192D"/><NavigationProperty Name="to_PurchaseDocumentItem" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_97016371F38D58C92824CBB9A7051227"
+					FromRole="FromRole_assoc_97016371F38D58C92824CBB9A7051227" ToRole="ToRole_assoc_97016371F38D58C92824CBB9A7051227"/><NavigationProperty Name="to_PurchasingOrganization" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_F43AC8BC63376BF369BF45079E4E67EB"
+					FromRole="FromRole_assoc_F43AC8BC63376BF369BF45079E4E67EB" ToRole="ToRole_assoc_F43AC8BC63376BF369BF45079E4E67EB"/><NavigationProperty Name="to_Status" Relationship="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_A1C6334B452052462852A8A57566E546"
+					FromRole="FromRole_assoc_A1C6334B452052462852A8A57566E546" ToRole="ToRole_assoc_A1C6334B452052462852A8A57566E546"/></EntityType>
+			<EntityType Name="Z_I_PurchaseDocumentPriorityType" sap:content-version="1">
+				<Key><PropertyRef Name="Priority"/></Key><Property Name="Priority" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:text="PriorityText"
+					sap:label=""/><Property Name="PriorityText" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase" sap:label=""/></EntityType>
+			<EntityType Name="Z_I_PurchaseDocumentStatusType" sap:content-version="1">
+				<Key><PropertyRef Name="Status"/></Key><Property Name="Status" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:text="StatusText" sap:label=""/><Property Name="StatusText" Type="Edm.String" MaxLength="32" sap:display-format="UpperCase" sap:label=""/></EntityType>
+			<EntityType Name="Z_I_PurchasingOrganizationType" sap:content-version="1">
+				<Key><PropertyRef Name="PurchasingOrganization"/></Key><Property Name="PurchasingOrganization" Type="Edm.String" Nullable="false" MaxLength="32" sap:display-format="UpperCase"
+					sap:text="Description"/><Property Name="Description" Type="Edm.String" MaxLength="128" sap:display-format="UpperCase"/><Property Name="Email" Type="Edm.String" MaxLength="255" sap:display-format="UpperCase" sap:semantics="email"/><Property Name="Phone" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:semantics="tel"/><Property Name="Fax" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:semantics="tel"/></EntityType>
+			<Association Name="assoc_A8CB5CBF503391C36C49FA4624119D97" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType" Multiplicity="1"
+				Role="FromRole_assoc_A8CB5CBF503391C36C49FA4624119D97"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_A8CB5CBF503391C36C49FA4624119D97"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_A8CB5CBF503391C36C49FA4624119D97"><PropertyRef Name="Currency"/></Principal>
+					<Dependent Role="FromRole_assoc_A8CB5CBF503391C36C49FA4624119D97"><PropertyRef Name="Currency"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_7226F57B24562C1E2865A8EE4D2F5151" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType" Multiplicity="1"
+				Role="FromRole_assoc_7226F57B24562C1E2865A8EE4D2F5151"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.I_UnitOfMeasureType" Multiplicity="0..1" Role="ToRole_assoc_7226F57B24562C1E2865A8EE4D2F5151"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_7226F57B24562C1E2865A8EE4D2F5151"><PropertyRef Name="UnitOfMeasure"/></Principal>
+					<Dependent Role="FromRole_assoc_7226F57B24562C1E2865A8EE4D2F5151"><PropertyRef Name="QuantityUnit"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_744267C89213C6F0BEAA53E2EB9C8F4F" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.I_UnitOfMeasureType" Multiplicity="1" Role="FromRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.I_UnitOfMeasureDimensionType" Multiplicity="0..1"
+				Role="ToRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F"><PropertyRef Name="UnitOfMeasureDimension"/></Principal>
+					<Dependent Role="FromRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F"><PropertyRef Name="UnitOfMeasureDimension"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_2DDFCD59E5A5AE54E8630BC945E67847" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType" Multiplicity="1" Role="FromRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.I_CurrencyType" Multiplicity="0..1" Role="ToRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847"><PropertyRef Name="Currency"/></Principal>
+					<Dependent Role="FromRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847"><PropertyRef Name="Currency"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_7B333AA07561F51701758495ACF99669" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType" Multiplicity="1" Role="FromRole_assoc_7B333AA07561F51701758495ACF99669"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.I_IndicatorType" Multiplicity="0..1" Role="ToRole_assoc_7B333AA07561F51701758495ACF99669"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_7B333AA07561F51701758495ACF99669"><PropertyRef Name="IndicatorValue"/></Principal>
+					<Dependent Role="FromRole_assoc_7B333AA07561F51701758495ACF99669"><PropertyRef Name="IsApprovalRequired"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_59F826874C7AC0BDF70077AFD365192D" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType" Multiplicity="1" Role="FromRole_assoc_59F826874C7AC0BDF70077AFD365192D"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchaseDocumentPriorityType" Multiplicity="0..1"
+				Role="ToRole_assoc_59F826874C7AC0BDF70077AFD365192D"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_59F826874C7AC0BDF70077AFD365192D"><PropertyRef Name="Priority"/></Principal>
+					<Dependent Role="FromRole_assoc_59F826874C7AC0BDF70077AFD365192D"><PropertyRef Name="Priority"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_97016371F38D58C92824CBB9A7051227" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType" Multiplicity="1" Role="FromRole_assoc_97016371F38D58C92824CBB9A7051227"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType" Multiplicity="*"
+				Role="ToRole_assoc_97016371F38D58C92824CBB9A7051227"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_assoc_97016371F38D58C92824CBB9A7051227"><PropertyRef Name="PurchaseDocument"/></Principal>
+					<Dependent Role="ToRole_assoc_97016371F38D58C92824CBB9A7051227"><PropertyRef Name="PurchaseDocument"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_F43AC8BC63376BF369BF45079E4E67EB" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType" Multiplicity="1" Role="FromRole_assoc_F43AC8BC63376BF369BF45079E4E67EB"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchasingOrganizationType" Multiplicity="0..1"
+				Role="ToRole_assoc_F43AC8BC63376BF369BF45079E4E67EB"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_F43AC8BC63376BF369BF45079E4E67EB"><PropertyRef Name="PurchasingOrganization"/></Principal>
+					<Dependent Role="FromRole_assoc_F43AC8BC63376BF369BF45079E4E67EB"><PropertyRef Name="PurchasingOrganization"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="assoc_A1C6334B452052462852A8A57566E546" sap:content-version="1"><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType" Multiplicity="1" Role="FromRole_assoc_A1C6334B452052462852A8A57566E546"/><End Type="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchaseDocumentStatusType" Multiplicity="0..1"
+				Role="ToRole_assoc_A1C6334B452052462852A8A57566E546"/>
+				<ReferentialConstraint>
+					<Principal Role="ToRole_assoc_A1C6334B452052462852A8A57566E546"><PropertyRef Name="Status"/></Principal>
+					<Dependent Role="FromRole_assoc_A1C6334B452052462852A8A57566E546"><PropertyRef Name="Status"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="Z_C_PURCHASEDOCUMENTLRP_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="I_Currency" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.I_CurrencyType" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:searchable="true" sap:content-version="1"/><EntitySet Name="I_Indicator" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.I_IndicatorType" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:content-version="1"/><EntitySet Name="I_UnitOfMeasure" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.I_UnitOfMeasureType" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:searchable="true" sap:content-version="1"/><EntitySet Name="I_UnitOfMeasureDimension" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.I_UnitOfMeasureDimensionType" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:content-version="1"/><EntitySet Name="Z_C_PurchaseDocumentItemLrp" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType"
+				sap:content-version="1"/><EntitySet Name="Z_C_PurchaseDocumentLrp" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType" sap:searchable="true"
+				sap:content-version="1"/><EntitySet Name="Z_I_PurchaseDocumentPriority" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchaseDocumentPriorityType"
+				sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/><EntitySet Name="Z_I_PurchaseDocumentStatus" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchaseDocumentStatusType" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:content-version="1"/><EntitySet Name="Z_I_PurchasingOrganization" EntityType="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchasingOrganizationType" sap:creatable="false"
+				sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+				<AssociationSet Name="assoc_7226F57B24562C1E2865A8EE4D2F5151"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_7226F57B24562C1E2865A8EE4D2F5151" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentItemLrp" Role="FromRole_assoc_7226F57B24562C1E2865A8EE4D2F5151"/><End EntitySet="I_UnitOfMeasure" Role="ToRole_assoc_7226F57B24562C1E2865A8EE4D2F5151"/></AssociationSet>
+				<AssociationSet Name="assoc_97016371F38D58C92824CBB9A7051227"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_97016371F38D58C92824CBB9A7051227" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentLrp" Role="FromRole_assoc_97016371F38D58C92824CBB9A7051227"/><End EntitySet="Z_C_PurchaseDocumentItemLrp" Role="ToRole_assoc_97016371F38D58C92824CBB9A7051227"/></AssociationSet>
+				<AssociationSet Name="assoc_F43AC8BC63376BF369BF45079E4E67EB"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_F43AC8BC63376BF369BF45079E4E67EB" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentLrp" Role="FromRole_assoc_F43AC8BC63376BF369BF45079E4E67EB"/><End EntitySet="Z_I_PurchasingOrganization" Role="ToRole_assoc_F43AC8BC63376BF369BF45079E4E67EB"/></AssociationSet>
+				<AssociationSet Name="assoc_2DDFCD59E5A5AE54E8630BC945E67847"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_2DDFCD59E5A5AE54E8630BC945E67847" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentLrp" Role="FromRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847"/><End EntitySet="I_Currency" Role="ToRole_assoc_2DDFCD59E5A5AE54E8630BC945E67847"/></AssociationSet>
+				<AssociationSet Name="assoc_7B333AA07561F51701758495ACF99669"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_7B333AA07561F51701758495ACF99669" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentLrp" Role="FromRole_assoc_7B333AA07561F51701758495ACF99669"/><End EntitySet="I_Indicator" Role="ToRole_assoc_7B333AA07561F51701758495ACF99669"/></AssociationSet>
+				<AssociationSet Name="assoc_744267C89213C6F0BEAA53E2EB9C8F4F"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_744267C89213C6F0BEAA53E2EB9C8F4F" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="I_UnitOfMeasure" Role="FromRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F"/><End EntitySet="I_UnitOfMeasureDimension" Role="ToRole_assoc_744267C89213C6F0BEAA53E2EB9C8F4F"/></AssociationSet>
+				<AssociationSet Name="assoc_A8CB5CBF503391C36C49FA4624119D97"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_A8CB5CBF503391C36C49FA4624119D97" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentItemLrp" Role="FromRole_assoc_A8CB5CBF503391C36C49FA4624119D97"/><End EntitySet="I_Currency" Role="ToRole_assoc_A8CB5CBF503391C36C49FA4624119D97"/></AssociationSet>
+				<AssociationSet Name="assoc_A1C6334B452052462852A8A57566E546"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_A1C6334B452052462852A8A57566E546" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentLrp" Role="FromRole_assoc_A1C6334B452052462852A8A57566E546"/><End EntitySet="Z_I_PurchaseDocumentStatus" Role="ToRole_assoc_A1C6334B452052462852A8A57566E546"/></AssociationSet>
+				<AssociationSet Name="assoc_59F826874C7AC0BDF70077AFD365192D"
+					Association="Z_C_PURCHASEDOCUMENTLRP_CDS.assoc_59F826874C7AC0BDF70077AFD365192D" sap:creatable="false" sap:updatable="false"
+					sap:deletable="false" sap:content-version="1"><End EntitySet="Z_C_PurchaseDocumentLrp" Role="FromRole_assoc_59F826874C7AC0BDF70077AFD365192D"/><End EntitySet="Z_I_PurchaseDocumentPriority" Role="ToRole_assoc_59F826874C7AC0BDF70077AFD365192D"/></AssociationSet>
+				<FunctionImport Name="Z_C_PurchaseDocumentLrpApprove" ReturnType="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType"
+					EntitySet="Z_C_PurchaseDocumentLrp" m:HttpMethod="POST" sap:action-for="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType"
+					sap:applicable-path="Approve_ac"><Parameter Name="PurchaseDocument" Type="Edm.String" Mode="In" MaxLength="10"/></FunctionImport>
+				<FunctionImport Name="Z_C_PurchaseDocumentLrpClose" ReturnType="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType"
+					EntitySet="Z_C_PurchaseDocumentLrp" m:HttpMethod="POST" sap:action-for="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType"
+					sap:applicable-path="Close_ac"><Parameter Name="PurchaseDocument" Type="Edm.String" Mode="In" MaxLength="10"/></FunctionImport>
+			</EntityContainer>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.I_UnitOfMeasureType/UnitOfMeasureDimension">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Unit of Measure Dimension"/><PropertyValue Property="CollectionPath" String="I_UnitOfMeasureDimension"/><PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="UnitOfMeasureDimension"/><PropertyValue Property="ValueListProperty" String="UnitOfMeasureDimension"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="UnitOfMeasureDimension_Text"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm"
+				Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType/PurchaseDocument">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Purchase Document"/><PropertyValue Property="CollectionPath" String="Z_C_PurchaseDocumentLrp"/><PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="PurchaseDocument"/><PropertyValue Property="ValueListProperty" String="PurchaseDocument"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="Description"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType/Currency">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Currency"/><PropertyValue Property="CollectionPath" String="I_Currency"/><PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="Currency"/><PropertyValue Property="ValueListProperty" String="Currency"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="Currency_Text"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm"
+				Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType/QuantityUnit">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Unit of Measure"/><PropertyValue Property="CollectionPath" String="I_UnitOfMeasure"/><PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="QuantityUnit"/><PropertyValue Property="ValueListProperty" String="UnitOfMeasure"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="UnitOfMeasure_Text"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm"
+				Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/IsApprovalRequired">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Indicator"/><PropertyValue Property="CollectionPath" String="I_Indicator"/><PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="IsApprovalRequired"/><PropertyValue Property="ValueListProperty" String="IndicatorValue"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="IndicatorValue_Text"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/Status">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Purchase Document Status"/><PropertyValue Property="CollectionPath" String="Z_I_PurchaseDocumentStatus"/><PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="Status"/><PropertyValue Property="ValueListProperty" String="Status"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="StatusText"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/Priority">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Purchase Document Priority"/><PropertyValue Property="CollectionPath" String="Z_I_PurchaseDocumentPriority"/><PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="Priority"/><PropertyValue Property="ValueListProperty" String="Priority"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="PriorityText"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm"
+				Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/PurchasingOrganization">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Purchase Organization"/><PropertyValue Property="CollectionPath" String="Z_I_PurchasingOrganization"/><PropertyValue Property="SearchSupported" Bool="false"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="PurchasingOrganization"/><PropertyValue Property="ValueListProperty" String="PurchasingOrganization"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="Description"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType/Currency">
+				<Annotation Term="Common.ValueList">
+					<Record><PropertyValue Property="Label" String="Currency"/><PropertyValue Property="CollectionPath" String="I_Currency"/><PropertyValue Property="SearchSupported" Bool="true"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut"><PropertyValue Property="LocalDataProperty" PropertyPath="Currency"/><PropertyValue Property="ValueListProperty" String="Currency"/></Record>
+								<Record Type="Common.ValueListParameterDisplayOnly"><PropertyValue Property="ValueListProperty" String="Currency_Text"/></Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm"
+				Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PURCHASEDOCUMENTLRP_CDS_Entities/Z_C_PurchaseDocumentLrp">
+				<Annotation Term="Capabilities.FilterRestrictions">
+					<Record>
+						<PropertyValue Property="NonFilterableProperties">
+							<Collection>
+								<PropertyPath>Approve_ac</PropertyPath>
+								<PropertyPath>Close_ac</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.SortRestrictions">
+					<Record>
+						<PropertyValue Property="NonSortableProperties">
+							<Collection>
+								<PropertyPath>Approve_ac</PropertyPath>
+								<PropertyPath>Close_ac</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentItemLrpType">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>PurchaseDocument</PropertyPath>
+						<PropertyPath>PurchaseDocumentItem</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_C_PurchaseDocumentLrpType">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>PurchaseDocument</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchaseDocumentPriorityType">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>Priority</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchaseDocumentStatusType">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>Status</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="Z_C_PURCHASEDOCUMENTLRP_CDS.Z_I_PurchasingOrganizationType">
+				<Annotation Term="Common.SemanticKey">
+					<Collection>
+						<PropertyPath>PurchasingOrganization</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/Z_C_PURCHASEDOCUMENTLRP_CDS/$metadata"/><atom:link xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/Z_C_PURCHASEDOCUMENTLRP_CDS/$metadata"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
